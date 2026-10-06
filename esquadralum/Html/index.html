@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esquadralum - Sistema de Produção</title>
+  <link rel="stylesheet" href="/Css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- CABEÇALHO PADRÃO -->
+  <header class="navbar">
+    <div class="logo-container">
+      <div class="logo-icon"></div>
+      <div class="logo-text">
+        <strong>ESQUADRALUM</strong>
+        <span>SOLUÇÕES EM ESQUADRIAS</span>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#" onclick="showScreen('scanner')">Início</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+
+  <!-- CONTAINER PRINCIPAL -->
+  <main class="main-content">
+
+    <!-- TELA 1: SCANNER / LEITURA DE CÓDIGO -->
+    <section id="screen-scanner" class="screen active">
+      <div class="scanner-card">
+        <div class="scanner-left">
+          <h2>Escanecie</h2>
+          <div class="qr-box" onclick="simulateScan('EQ-001')">
+            <div class="corner top-left"></div>
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
+            <div class="corner bottom-right"></div>
+            <p class="scan-hint">Clique aqui para simular a leitura do QR Code</p>
+          </div>
+        </div>
+
+        <div class="scanner-divider">
+          <span>ou</span>
+        </div>
+
+        <div class="scanner-right">
+          <h2>Digite o Código</h2>
+          <form id="code-form" onsubmit="handleManualSubmit(event)">
+            <div class="input-group">
+              <i class="fa-solid fa-lock input-icon-left"></i>
+              <input type="text" id="code-input" placeholder="Digite o código (ex: EQ-001)" required>
+              <i class="fa-solid fa-eye input-icon-right" id="toggle-visibility"></i>
+            </div>
+            <button type="submit" class="btn-primary" style="margin-top: 15px; width: 100%;">Acessar Produção</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELA 2: DASHBOARD DE PRODUÇÃO -->
+    <section id="screen-production" class="screen">
+      <div class="production-grid">
+
+        <!-- BLOCO 1: IDENTIFICAÇÃO DA ESQUADRIA -->
+        <div class="card card-identification">
+          <div class="card-header">
+            <h3>Identificação da Esquadria</h3>
+          </div>
+          <div class="card-body">
+            <div class="window-illustration">
+              <div class="window-pane left">
+                <div class="glare"></div>
+              </div>
+              <div class="window-pane right">
+                <div class="glare"></div>
+              </div>
+            </div>
+            <div class="info-list">
+              <p><strong>Código:</strong> <span id="prod-code">EQ-001</span></p>
+              <p><strong>Tipo:</strong> <span id="prod-type">Janela de Correr</span></p>
+              <p><strong>Local:</strong> <span id="prod-location">Sala 01</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCO 2: ETAPA ATUAL -->
+        <div class="card card-steps">
+          <div class="card-header">
+            <h3>Etapa Atual</h3>
+          </div>
+          <div class="card-body">
+            <div class="timeline">
+              <div class="step completed" id="step-1">
+                <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+                <span class="step-label">1. Corte</span>
+              </div>
+              <div class="step active" id="step-2">
+                <div class="step-icon">2</div>
+                <span class="step-label">2. Montagem</span>
+              </div>
+              <div class="step" id="step-3">
+                <div class="step-icon">3</div>
+                <span class="step-label">3. Acabamento</span>
+              </div>
+              <div class="step" id="step-4">
+                <div class="step-icon">4</div>
+                <span class="step-label">4. Revisão</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCO 3 E 4: STATUS + OBSERVAÇÕES -->
+        <div class="right-column">
+          
+          <!-- STATUS -->
+          <div class="card card-status">
+            <div class="card-header">
+              <h3>Status</h3>
+            </div>
+            <div class="card-body">
+              <div class="status-badge green">
+                <span class="status-dot"></span>
+                <span id="prod-status">Em andamento</span>
+              </div>
+              <div class="status-details">
+                <p><strong>Início:</strong> <span id="prod-start">10/06/2025 08:30</span></p>
+                <p><strong>Responsável:</strong> <span id="prod-responsible">João Silva</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- OBSERVAÇÃO E IMPEDIMENTOS -->
+          <div class="card card-notes">
+            <div class="card-header">
+              <h3>Observação e Impedimentos</h3>
+            </div>
+            <div class="card-body">
+              <textarea id="notes-input" placeholder="Digite aqui os observações...&#10;&#10;Ex: falta de material, ajuste necessário, etc.."></textarea>
+              <button type="button" class="btn-action" onclick="saveNotes()">Registrar</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ PADRÃO -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <div class="logo-icon white"></div>
+      <div class="logo-text">
+        <strong>ESQUADRALUM</strong>
+        <span>SOLUÇÕES EM ESQUADRIAS</span>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-info">
+      <span>Suporte Técnico e Contato</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
